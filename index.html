@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 Controller Interaction</title>
+    <style>
+        #output {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="output">Press buttons on your controller</div>
+
+    <script>
+        function updateOutput(button) {
+            var outputElement = document.getElementById('output');
+            outputElement.innerText = 'Button pressed: ' + button;
+        }
+
+        window.addEventListener("gamepadconnected", function (e) {
+            console.log("Gamepad connected:", e.gamepad);
+
+            setInterval(function () {
+                var gamepads = navigator.getGamepads();
+                // Access button state and update your application accordingly
+                if (gamepads[0].buttons[0].pressed) { // Change index and button as needed
+                    updateOutput("Button A");
+                } else if (gamepads[0].buttons[1].pressed) {
+                    updateOutput("Button B");
+                }
+                // Add more conditions for other buttons
+
+                // You can also access other properties like axes, etc.
+            }, 100);
+        });
+
+        window.addEventListener("gamepaddisconnected", function (e) {
+            console.log("Gamepad disconnected:", e.gamepad);
+        });
+    </script>
+</body>
+</html>
